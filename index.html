@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>B-15 • Versão não encontrada</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --primary: #027be3;
+      --accent: #00b4d8;
+      --bg: #0d1117;
+      --card: #161b22;
+      --text: #c9d1d9;
+      --muted: #8b949e;
+    }
+
+    * { box-sizing: border-box; font-family: "Inter", "Roboto", sans-serif; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .card {
+      background: var(--card);
+      padding: 2.5rem 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 0 25px rgba(0,0,0,0.4);
+      width: 90%;
+      max-width: 440px;
+      text-align: center;
+      animation: fadeIn 0.5s ease;
+    }
+
+    h1 {
+      color: var(--primary);
+      font-size: 1.9rem;
+      margin-bottom: .5rem;
+    }
+
+    p {
+      color: var(--muted);
+      font-size: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    input {
+      padding: .7rem 1rem;
+      border-radius: .5rem;
+      width: 100%;
+      border: none;
+      outline: none;
+      background: #21262d;
+      color: var(--text);
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    input:focus { box-shadow: 0 0 0 2px var(--accent); }
+
+    button {
+      width: 100%;
+      padding: .7rem 1rem;
+      border: none;
+      border-radius: .5rem;
+      background: var(--primary);
+      color: #fff;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background .2s ease;
+    }
+
+    button:hover { background: var(--accent); }
+
+    .footer {
+      margin-top: 2rem;
+      font-size: .85rem;
+      color: var(--muted);
+    }
+
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>🚀 B-15 Ambiente de Homologação</h1>
+    <p>Digite a versão que deseja acessar</p>
+
+    <input id="versionInput" type="text" maxlength="20" autofocus>
+    <button onclick="goToVersion()">Acessar versão</button>
+  </div>
+
+  <script>
+    const path = window.location.pathname;
+    const hasRedirect = window.location.search.includes('redirect=');
+
+    // Redireciona apenas se veio de uma rota interna E ainda não tem redirect
+    if (!hasRedirect) {
+      const match = path.match(/\/homolog\/(\d{4})\/(.*)/);
+      if (match) {
+        const version = match[1];
+        const rest = match[2];
+        const newUrl = `/homolog/${version}/?redirect=/${rest}`;
+        window.location.replace(newUrl);
+      }
+    }
+
+    // Entrada manual de versão
+    function goToVersion() {
+      const version = document.getElementById('versionInput').value.trim();
+      if (!version) {
+        alert('Por favor, digite uma versão.');
+        return;
+      }
+      window.location.href = `/homolog/${version}/`;
+    }
+
+    document.getElementById('versionInput').addEventListener('keypress', e => {
+      if (e.key === 'Enter') goToVersion();
+    });
+  </script>
+</body>
+</html>
