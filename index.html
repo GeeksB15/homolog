@@ -97,32 +97,31 @@
 <body>
   <div class="card">
     <h1>🚀 B-15 Ambiente de Homologação</h1>
-    <p>Digite a versão que deseja acessar</p>
+    <p>Digite a versão, módulo ou branch desejado</p>
 
-    <input id="versionInput" type="text" maxlength="20" autofocus>
-    <button onclick="goToVersion()">Acessar versão</button>
+    <input id="versionInput" type="text" maxlength="50" placeholder="ex: branch-agenda-56789" autofocus>
+    <button onclick="goToVersion()">Acessar</button>
   </div>
 
   <script>
     const path = window.location.pathname;
     const hasRedirect = window.location.search.includes('redirect=');
 
-    // Redireciona apenas se veio de uma rota interna E ainda não tem redirect
     if (!hasRedirect) {
-      const match = path.match(/\/homolog\/(\d{4})\/(.*)/);
+      // Captura qualquer nome de branch, módulo ou versão após /homolog/
+      const match = path.match(/^\/homolog\/([^\/]+)\/?(.*)/);
       if (match) {
-        const version = match[1];
+        const versionOrBranch = match[1];
         const rest = match[2];
-        const newUrl = `/homolog/${version}/?redirect=/${rest}`;
+        const newUrl = `/homolog/${versionOrBranch}/?redirect=/${rest}`;
         window.location.replace(newUrl);
       }
     }
 
-    // Entrada manual de versão
     function goToVersion() {
       const version = document.getElementById('versionInput').value.trim();
       if (!version) {
-        alert('Por favor, digite uma versão.');
+        alert('Por favor, digite uma versão, módulo ou branch.');
         return;
       }
       window.location.href = `/homolog/${version}/`;
