@@ -5,15 +5,14 @@
     \____/\___/\___/_/|_/____/   /____/\____/_/\__,_/\___/\____/\___/____/  
                                                      /_)                    
 
-# 🧠 Geeks Soluções — B15 App + Homolog Deploy
+# Geeks Soluções — B15 App + Homolog Deploy
 
 Este projeto faz parte do **ecossistema B-15**, composto por dois repositórios principais:
 
 - **B15App** → Aplicação Quasar Framework (frontend principal)
 - **homolog** → Ambiente de homologação hospedado no **GitHub Pages**
 
-O fluxo de publicação automatizado permite gerar versões de homologação isoladas, acessíveis via  
-👉 **https://geeksb15.github.io/homolog**
+O fluxo de publicação automatizado permite gerar versões de homologação isoladas, acessíveis via **https://geeksb15.github.io/homolog**
 
 Cada versão de build é armazenada em uma subpasta do repositório `homolog`, ex:  
 ```
@@ -41,12 +40,12 @@ A árvore esperada de diretórios no mesmo nível:
      └─ ...
 ```
 
-> ⚠️ É **obrigatório** que os diretórios `B15App` e `homolog` estejam lado a lado,  
+> É **obrigatório** que os diretórios `B15App` e `homolog` estejam lado a lado,  
 > pois o script de deploy copia os arquivos diretamente para a pasta do `homolog`.
 
 ---
 
-### 📦 Deploy para Homolog
+### Deploy para Homolog
 
 ```bash
 npm run deploy:homolog <versao>
